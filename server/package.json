@@ -6,7 +6,7 @@
     "scripts": {
         "start": "ts-node index.ts",
         "dev": "nodemon index.ts",
-        "build": "prisma generate"
+        "build": "prisma generate --schema=./prisma/schema.prisma"
     },
     "keywords": [],
     "author": "",
