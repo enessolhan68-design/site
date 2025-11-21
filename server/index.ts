@@ -270,7 +270,7 @@ app.put('/api/blog/:id', authenticateToken, async (req: AuthRequest, res) => {
     }
 });
 
-app.delete('/api/blog/:id', authenticateToken, async (req: AuthRequest, res) => {
+app.post('/api/blog', authenticateToken, async (req: AuthRequest, res) => {
     try {
         const { title, content, image, authorId } = req.body;
 
@@ -296,6 +296,25 @@ app.delete('/api/blog/:id', authenticateToken, async (req: AuthRequest, res) => 
     } catch (error) {
         console.error('Error creating blog post:', error);
         res.status(500).json({ error: 'Failed to create blog post' });
+    }
+});
+
+app.delete('/api/blog/:id', authenticateToken, async (req: AuthRequest, res) => {
+    try {
+        const { id } = req.params;
+        const post = await prisma.blogPost.findUnique({ where: { id: Number(id) } });
+
+        if (!post) return res.status(404).json({ error: 'Post not found' });
+
+        // Check permissions: Admin or Author
+        if (req.user?.role !== 'ADMIN' && post.authorId !== req.user?.id) {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+
+        await prisma.blogPost.delete({ where: { id: Number(id) } });
+        res.json({ message: 'Post deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete post' });
     }
 });
 
