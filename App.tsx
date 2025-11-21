@@ -15,6 +15,7 @@ import { AdminAppointments } from './pages/AdminAppointments';
 import { AdminMessages } from './pages/AdminMessages';
 import { AdminBlog } from './pages/AdminBlog';
 import { AdminUsers } from './pages/AdminUsers';
+import { AdminTeam } from './pages/AdminTeam';
 import { BlogPostDetail } from './pages/BlogPostDetail';
 
 // Scroll to top on route change
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="appointments" element={<AdminAppointments />} />
             <Route path="messages" element={<AdminMessages />} />
             <Route path="blog" element={<AdminBlog />} />
+            <Route path="team" element={<AdminTeam />} />
             <Route path="users" element={<AdminUsers />} />
           </Route>
         </Route>

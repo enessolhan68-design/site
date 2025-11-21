@@ -45,3 +45,15 @@ model Admin {
   role     String     @default("EDITOR") // "ADMIN" or "EDITOR"
   posts    BlogPost[]
 }
+
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  name      String
+  role      String
+  spec      String
+  image     String
+  category  String
+  linkedin  String?
+  email     String?
+  createdAt DateTime @default(now())
+}

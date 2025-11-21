@@ -299,6 +299,61 @@ app.delete('/api/blog/:id', authenticateToken, async (req: AuthRequest, res) => 
     }
 });
 
+// --- Team ---
+app.get('/api/team', async (req, res) => {
+    try {
+        const team = await prisma.teamMember.findMany({ orderBy: { createdAt: 'asc' } });
+        res.json(team);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch team members' });
+    }
+});
+
+app.post('/api/team', authenticateToken, async (req: AuthRequest, res) => {
+    try {
+        if (req.user?.role !== 'ADMIN') {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+        const { name, role, spec, image, category, linkedin, email } = req.body;
+        const member = await prisma.teamMember.create({
+            data: { name, role, spec, image, category, linkedin, email }
+        });
+        res.json(member);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to create team member' });
+    }
+});
+
+app.put('/api/team/:id', authenticateToken, async (req: AuthRequest, res) => {
+    try {
+        if (req.user?.role !== 'ADMIN') {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+        const { id } = req.params;
+        const { name, role, spec, image, category, linkedin, email } = req.body;
+        const member = await prisma.teamMember.update({
+            where: { id: Number(id) },
+            data: { name, role, spec, image, category, linkedin, email }
+        });
+        res.json(member);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update team member' });
+    }
+});
+
+app.delete('/api/team/:id', authenticateToken, async (req: AuthRequest, res) => {
+    try {
+        if (req.user?.role !== 'ADMIN') {
+            return res.status(403).json({ error: 'Unauthorized' });
+        }
+        const { id } = req.params;
+        await prisma.teamMember.delete({ where: { id: Number(id) } });
+        res.json({ message: 'Team member deleted' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete team member' });
+    }
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

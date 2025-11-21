@@ -98,4 +98,54 @@ export const api = {
         }
         return response.json();
     },
+
+    // Team
+    getTeam: async () => {
+        const response = await fetch(`${API_URL}/team`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch team members');
+        }
+        return response.json();
+    },
+
+    createTeamMember: async (data: any) => {
+        const response = await fetch(`${API_URL}/team`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeader(),
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to create team member');
+        }
+        return response.json();
+    },
+
+    updateTeamMember: async (id: number, data: any) => {
+        const response = await fetch(`${API_URL}/team/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeader(),
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update team member');
+        }
+        return response.json();
+    },
+
+    deleteTeamMember: async (id: number) => {
+        const response = await fetch(`${API_URL}/team/${id}`, {
+            method: 'DELETE',
+            headers: getAuthHeader(),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to delete team member');
+        }
+        return response.json();
+    },
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Calendar, MessageSquare, FileText, LogOut, Home, User } from 'lucide-react';
+import { LayoutDashboard, Calendar, MessageSquare, FileText, LogOut, Home, User, Users } from 'lucide-react';
 
 export const AdminLayout = () => {
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ export const AdminLayout = () => {
         { path: '/admin/appointments', icon: Calendar, label: 'Randevular' },
         { path: '/admin/messages', icon: MessageSquare, label: 'Mesajlar' },
         { path: '/admin/blog', icon: FileText, label: 'Blog Yönetimi' },
+        { path: '/admin/team', icon: Users, label: 'Ekip Yönetimi' },
         ...(currentUser.role === 'ADMIN' ? [{ path: '/admin/users', icon: User, label: 'Kullanıcılar' }] : []),
     ];
 
