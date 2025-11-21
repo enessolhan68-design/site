@@ -64,14 +64,17 @@ export const AdminLayout = () => {
             </aside>
 
             {/* Mobile Header */}
-            <div className="md:hidden fixed top-0 left-0 right-0 bg-slate-900 text-white p-4 z-40 flex justify-between items-center shadow-md">
+            <div className="md:hidden fixed top-0 left-0 right-0 bg-slate-900 text-white p-4 z-50 flex justify-between items-center shadow-md">
                 <div className="flex items-center gap-3">
-                    <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white">
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="text-white p-1 hover:bg-slate-800 rounded border border-slate-700"
+                    >
                         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                     <h2 className="font-bold text-lg">Admin Panel</h2>
                 </div>
-                <button onClick={handleLogout} className="text-red-400"><LogOut size={20} /></button>
+                <button onClick={handleLogout} className="text-red-400 p-1"><LogOut size={20} /></button>
             </div>
 
             {/* Mobile Sidebar Overlay */}
