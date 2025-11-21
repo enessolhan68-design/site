@@ -88,6 +88,21 @@ export const api = {
         return response.json();
     },
 
+    updateBlogPost: async (id: number, data: any) => {
+        const response = await fetch(`${API_URL}/blog/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeader(),
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to update blog post');
+        }
+        return response.json();
+    },
+
     deleteBlogPost: async (id: number) => {
         const response = await fetch(`${API_URL}/blog/${id}`, {
             method: 'DELETE',
