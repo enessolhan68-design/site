@@ -81,8 +81,9 @@ export const AdminBlog = () => {
             setFormData({ title: '', content: '', authorId: '', image: '' });
             setEditingId(null);
             fetchPosts();
-        } catch (error) {
-            alert('İşlem başarısız oldu.');
+        } catch (error: any) {
+            console.error('Update error:', error);
+            alert(`İşlem başarısız oldu: ${error.message || 'Bilinmeyen hata'}`);
         }
     };
 
