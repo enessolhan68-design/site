@@ -64,7 +64,7 @@ export const AdminLayout = () => {
             </aside>
 
             {/* Mobile Header */}
-            <div className="md:hidden fixed top-0 left-0 right-0 bg-slate-900 text-white p-4 z-50 flex justify-between items-center shadow-md">
+            <div className="md:hidden fixed top-0 left-0 right-0 bg-blue-900 text-white p-4 z-50 flex justify-between items-center shadow-md">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
