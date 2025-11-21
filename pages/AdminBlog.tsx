@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { api } from '../services/api';
+import { api, API_URL } from '../services/api';
 import { Plus, Trash2, FileText, Edit2, Eye } from 'lucide-react';
 
 export const AdminBlog = () => {
@@ -30,7 +30,7 @@ export const AdminBlog = () => {
         if (currentUser.role === 'ADMIN') {
             try {
                 const token = localStorage.getItem('adminToken');
-                const response = await fetch('http://localhost:3001/api/users', {
+                const response = await fetch(`${API_URL}/users`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (response.ok) {

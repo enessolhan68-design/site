@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2, User, Shield, Edit2, Save, X } from 'lucide-react';
+import { API_URL } from '../services/api';
 
 interface AdminUser {
     id: number;
@@ -31,7 +32,7 @@ export const AdminUsers = () => {
     const fetchUsers = async () => {
         try {
             const token = localStorage.getItem('adminToken');
-            const response = await fetch('http://localhost:3001/api/users', {
+            const response = await fetch(`${API_URL}/users`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -52,7 +53,7 @@ export const AdminUsers = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('adminToken');
-            const response = await fetch('http://localhost:3001/api/users', {
+            const response = await fetch(`${API_URL}/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ export const AdminUsers = () => {
 
         try {
             const token = localStorage.getItem('adminToken');
-            const response = await fetch(`http://localhost:3001/api/users/${id}`, {
+            const response = await fetch(`${API_URL}/users/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });
