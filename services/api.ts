@@ -163,4 +163,15 @@ export const api = {
         }
         return response.json();
     },
+
+    // Users
+    getUsers: async () => {
+        const response = await fetch(`${API_URL}/users`, {
+            headers: getAuthHeader(),
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch users');
+        }
+        return response.json();
+    },
 };
